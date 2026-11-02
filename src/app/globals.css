@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/* Brand tokens — navy ink + red accent from the GBR logo, on the reference's paper-white. */
+@theme inline {
+  --color-ink: #2a1f4d;
+  --color-brand: #b80c1e;
+  --color-warm: #e8a33d;
+  --color-paper: #fbfbfa;
+  --color-soft: #f4f4f6;
+  --color-line: #e3e2e8;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+/* Full-width page frame with hairline side rules. */
+.frame {
+  width: 100%;
+  margin-inline: 0;
+  max-width: none;
+}
+
+/* Logo-style marquee with faded edges */
+.marquee {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.farmer-gallery {
+  mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
+}
+.farmer-gallery-column {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  animation: farmer-gallery-scroll 28s linear infinite;
+  will-change: transform;
+}
+.farmer-gallery-column--1 {
+  animation-direction: reverse;
+  animation-duration: 34s;
+}
+.farmer-gallery-column--2 {
+  animation-duration: 24s;
+}
+.farmer-gallery-set {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.farmer-gallery:hover .farmer-gallery-column {
+  animation-play-state: paused;
+}
+@keyframes farmer-gallery-scroll {
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .farmer-gallery-column {
+    animation: none;
+    will-change: auto;
+  }
+}
